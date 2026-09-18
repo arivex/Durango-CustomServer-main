@@ -386,3 +386,207 @@ CHARACTERS OR WORLD DATA ARE MISSING:
 10. GITHUB - CREATE A PRIVATE REPOSITORY
 
 ---
+
+Recommended:
+
+Use a PRIVATE GitHub repository for server source and development
+files.
+
+Do not upload:
+
+account keys
+player saves
+AppData-nx
+admin tokens
+passwords
+private keys
+logs
+personal data
+
+Create a repository at:
+
+https://github.com/new
+
+Set visibility to:
+
+Private
+
+Install Git for Windows if needed:
+
+https://git-scm.com/download/win
+
+Open PowerShell in the repository folder:
+
+cd C:\Path\To\Gamon-CustomServer-main
+
+Initialize Git:
+
+git init
+
+Add files:
+
+git add .
+
+Commit:
+
+git commit -m "Initial Gamon Custom Server"
+
+Connect the GitHub repository:
+
+git branch -M main
+git remote add origin https://github.com/OWNER/REPOSITORY.git
+
+Push:
+
+git push -u origin main
+
+11. RECOMMENDED .GITIGNORE
+
+---
+
+Before the first GitHub push, create a .gitignore file containing
+at least:
+
+bin/
+obj/
+AppData/
+AppData-nx/
+logs/
+*.log
+*.player
+*.player.bak
+account.key
+accountkey
+*.token
+*.secret
+
+Also exclude:
+
+admin tokens
+passwords
+private keys
+credentials
+personal player data
+
+12. BEFORE EVERY GITHUB PUSH
+
+---
+
+Check that these are NOT included:
+
+AppData-nx
+AppData
+account.key
+accountkey
+*.player
+*.player.bak
+logs
+*.log
+private admin tokens
+passwords
+private keys
+credentials
+personal data
+
+If a secret was pushed accidentally:
+
+* Revoke or rotate it immediately.
+* Removing the file in a later commit is not enough.
+* Remove the secret from Git history using a trusted secret-removal
+  procedure.
+
+13. SERVER PACKAGE DISTRIBUTION
+
+---
+
+The recommended downloadable packages are:
+
+GamonServer.zip
+GamonClient.zip
+
+Server package:
+
+GamonServer.zip
+
+Client package:
+
+GamonClient.zip
+
+For large ZIP files, GitHub Releases are recommended instead of storing
+large binary files directly inside the Git repository.
+
+Example release:
+
+Durango Custom Server v0.4
+
+Files:
+
+GamonServer.zip
+GamonClient.zip
+
+14. UPDATING THE SERVER
+
+---
+
+Before updating:
+
+* Stop the running server.
+
+* Back up:
+
+  GamonServer\AppData-nx\
+
+* Keep the backup separate from the source repository.
+
+Then:
+
+* Replace/update files inside:
+
+  GamonServer\publish-server\
+
+* Do NOT delete or overwrite:
+
+  GamonServer\AppData-nx\
+
+* Start:
+
+  GamonServer\startserver.bat
+
+The private save directory and the server executable are intentionally
+kept separate.
+
+15. FINAL FOLDER STRUCTURE
+
+---
+
+SERVER:
+
+GamonServer
+|
++-- startserver.bat
+|
++-- AppData-nx
+|     +-- private server/player save data
+|
++-- publish-server
++-- DurangoServer.exe
++-- Core
++-- GameCode
++-- Support
++-- Shims
++-- data
++-- admin
++-- other required server files
+
+CLIENT:
+
+GamonClient
+|
++-- DinoWorldLauncher.exe
++-- Durango.exe
++-- UnityPlayer.dll
++-- Durango_Data
++-- locales
++-- clusters.json
+
+END OF GUIDE
